@@ -17,6 +17,7 @@ start is pressed on the Driver Hub, up until "stop" is pressed. */
 Autonomous OpModes and TeleOp OpModes, distinguished by this annotation. Note that the name on the Driver Hub
 does not technically have to match the class name– it just generally keeps things simple if it's similar
 enough to recognize. */
+
 @TeleOp(name = "TeleOp OpMode")
 public class BasicOpMode extends OpMode {
     // declare variables here, note that every line *must* end with a semicolon (;)
@@ -72,7 +73,7 @@ public class BasicOpMode extends OpMode {
     as long as "stop" has not been pressed yet. This means the code will *not* just be run once,
     and we can write it with the assumption that it's running continuously with constantly updating
     information. */
-    // tl;dr: This is where we write the code that makes our robot move throughout the game!!
+    // tl;dr: This is where we write the code that makes our robot move throughout the game!
     @Override
     public void loop() {
         /* The first thing we're going to write out is the drive code. The logic behind how we're going
