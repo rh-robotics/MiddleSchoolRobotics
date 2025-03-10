@@ -28,6 +28,14 @@ public class BasicMotorTest extends OpMode {
     // tl;dr: This is where we write the code that makes our robot move throughout the game!!
     @Override
     public void loop() {
-        motor.setPower(1);
+        motor.setPower(gamepad1.left_stick_y);
+
+        if(gamepad1.a) {
+            motor.setPower(1);
+        }
+
+        if(gamepad1.b) {
+            motor.setPower(-1);
+        }
     }
 }

@@ -18,12 +18,13 @@ Autonomous OpModes and TeleOp OpModes, distinguished by this annotation. Note th
 does not technically have to match the class name– it just generally keeps things simple if it's similar
 enough to recognize. */
 
-@TeleOp(name = "TeleOp OpMode")
-public class BasicOpMode extends OpMode {
+@TeleOp(name = "Rohan TeleOp OpMode")
+public class Rohan extends OpMode {
+
+    CRServo waterArm;
     // declare variables here, note that every line *must* end with a semicolon (;)
     DcMotor leftDrive;
     DcMotor rightDrive;
-    CRServo intakeServo;
 
     // TODO: declare the rest of the variables here– think through what good names for each of the
     // TODO: motors and servos on our robot could be.
@@ -61,10 +62,23 @@ public class BasicOpMode extends OpMode {
         called "leftDrive" can be found in motor port 1, which we reference here to be able to affect
         it throughout our program. */
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
-
-        // TODO: initialize the rest of the motors and servos on your robot!
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-        intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+
+
+
+        if (gamepad1.left_trigger==0) {
+            waterArm.setPower(-1);
+            if (gamepad1.right_trigger>0) {
+                waterArm.setPower(1);
+            }
+        }
+        else  {
+            waterArm.setPower(0);
+            if (gamepad1.right_trigger>0) {
+                waterArm.setPower(1);
+            }
+        }
+        // TODO: initialize the rest of the motors and servos on your robot!
 
         /* Optional: Note here that we use the same addData function to update a value called "Status".
         This will make it so it will change the line we "printed" to the console, rather than printing a new one,
@@ -90,6 +104,7 @@ public class BasicOpMode extends OpMode {
 
         // TODO: assign turnValue a value based on the right joystick's left to right value.
 
+
         // What might be some advantage of using a variable to hold the left and right drive powers?
         // What would an alternative be?
         leftDrivePower = forwardValue;
@@ -105,7 +120,7 @@ public class BasicOpMode extends OpMode {
         /* Why do you think we're multiplying the leftDrivePower by MAX_DRIVE_POWER? Why is it important
         that leftDrivePower already falls between -1.0 and 1.0? Think through what would happen at
         some important points– what happens at 1.0? What happens at -1.0? What about 0? 0.5? */
-//        leftDrive.setPower(MAX_DRIVE_POWER * leftDrivePower);
+        leftDrive.setPower(MAX_DRIVE_POWER * leftDrivePower);
 
         // TODO: set the rightDrive motor power
 
@@ -118,12 +133,5 @@ public class BasicOpMode extends OpMode {
         // IMPORTANT: make sure you make a plan *BEFORE* writing the code out!! This will help to keep you out
         // of making so many semantic (logic) errors, plus it'll make sure you're writing good code and keep
         // you from basically tying yourself up in knots with your program.
-
-        intakeServo.setPower(0);
-        if (gamepad1.left_trigger >= 0.2) {
-            intakeServo.setPower(1);
-        } else if (gamepad1.left_bumper) {
-            intakeServo.setPower(-1);
-        }
     }
 }
